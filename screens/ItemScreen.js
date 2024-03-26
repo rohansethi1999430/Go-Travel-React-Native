@@ -1,8 +1,10 @@
 import {View,Text,SafeAreaView,ScrollView,Image,TouchableOpacity,
   } from "react-native";
-  import React, { useLayoutEffect } from "react";
+  import React, { useLayoutEffect,useState } from "react";
   import { useNavigation } from "@react-navigation/native";
   import { FontAwesome, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
+  import { savingLikedData } from '../api/callingExposedApis';
+  
   
   const ItemScreen = ({ route }) => {
     const navigation = useNavigation();
@@ -13,6 +15,19 @@ import {View,Text,SafeAreaView,ScrollView,Image,TouchableOpacity,
         headerShown: false,
       });
     }, []);
+
+    const [isLiked, setLiked] = useState(false);
+
+    const handleHeart = async () => {
+      try {
+        setLiked(!isLiked);
+        savingLikedData(route.params);
+        // Additional logic after posting data if needed
+      } catch (error) {
+        console.error('Error handling heart:', error);
+      }
+    };
+
   
     return (
       <SafeAreaView className="flex-1 bg-white relative">
@@ -169,11 +184,16 @@ import {View,Text,SafeAreaView,ScrollView,Image,TouchableOpacity,
               </View>
             )}
   
-            <View className="mt-4 px-4 py-4 rounded-lg bg-[#06B2BE] items-center justify-center mb-12">
-              <Text className="text-3xl font-semibold uppercase tracking-wider text-gray-100">
-                Book Now
-              </Text>
+            <View className="mt-4 px-4 py-4 rounded-full bg-white items-center justify-center mb-12">
+            <TouchableOpacity className="items-center justify-center flex-1 flex-end mb-0" onPress={handleHeart} >
+        <FontAwesome 
+          name={isLiked ? 'heart' : 'heart-o'}
+          size={50}
+          color={isLiked ? 'red' : 'black'}
+        />
+         </TouchableOpacity>  
             </View>
+
           </View>
         </ScrollView>
       </SafeAreaView>

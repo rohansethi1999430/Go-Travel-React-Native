@@ -1,35 +1,50 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, FlatList, Image } from 'react-native';
-// import tw from 'tailwind-rn';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 // Dummy data for the FlatList
 const DATA = [
-  { id: '1', title: 'Découvrez la culture française' },
-  { id: '2', title: 'Apprends le français' },
-  { id: '3', title: 'Découvrez la cuisine française' },
-  { id: '4', title: 'Histoire de France' }
+  { id: 'EnglishToFrench', title: 'Français Facile', translate: "Easy French" },
+  { id: 'Learn', title: 'Apprends le français', translate: "Learn French" },
+  { id: 'FrenchCuisine', title: 'Découvrez la cuisine française', translate: "Discover the French cuisine" },
+  { id: 'History', title: 'Histoire de France', translate: "History of France" }
 ];
 
-// Function to render each item in the FlatList
-const renderItem = ({ item }) => (
-  <View className ={"bg-gray-200 p-6 my-2 rounded-lg w-full space-y-5 px-3 mt-5" }>
-    <Text className="text-2xl text-[#428288] rounded-md text-[20px] font-semibold">{item.title}</Text>
-  </View>
-);
-
 const FlatListWithTailwind = () => {
-  return (
-    <View className={" bg-white h-full w-full space-y-2 "}>
+  const navigation = useNavigation(); // Move useNavigation hook here
 
-            <Image
-              source={{uri : "https://medias-prepare.paris2024.org/uploads/2020/11/20201106-JO2024-Centres-de-Pre%CC%81paration-Les-re%CC%81gions-franc%CC%A7aises-Frise-scaled.jpg?x-oss-process=image/resize,w_2560,h_1031,m_lfit/format,webp"}}
-              className=" h-72 object-cover rounded-md p-2 m-1"
-            />
+  // Function to render each item in the FlatList
+  const renderItem = ({ item }) => (
+    <TouchableOpacity onPress={() => navigateToScreen(item.id)}>
+      <View className="bg-gray-200 p-1 my-2 rounded-lg w-full space-y-1 px-2 mt-3">
+        <Text className="text-lg text-[#428288] font-semibold mt-3">{item.title}</Text>
+        <Text className="text-base text-[#428288] font-semibold">{item.translate}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
+  const navigateToScreen = (id) => {
+    switch (id) {
+      case 'EnglishToFrench':
+        navigation.navigate("EnglishToFrench");
+        break;
+      case 'Learn':
+        navigation.navigate("Learn");
+        break;
+      // Add cases for other IDs as needed
+      default:
+        // Handle the default case, maybe show an error message or do nothing
+        break;
+    }
+  };
+
+  return (
+    <View className="bg-white h-full w-full space-y-1">
       <FlatList
         data={DATA}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        className={"p-4"}
+        className="p-2"
       />
     </View>
   );

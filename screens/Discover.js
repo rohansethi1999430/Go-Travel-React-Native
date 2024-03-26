@@ -2,16 +2,19 @@ import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, Activity
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useNavigation } from '@react-navigation/native';
-import { Attractions, Avatar, Hotels, Restaurants, NotFound} from '../assets';
+import { Attractions, Avatar, Hotels, Restaurants, NotFound,WishList} from '../assets';
 import MenuContainer from '../components/MenuContainer';
 import { FontAwesome } from '@expo/vector-icons';
 import ItemCardContainer from '../components/ItemCardContainer';
 import { getPlacesData } from '../api';
+import { AntDesign } from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
+
 
 
 const Discover = () => {
 
- const [type, setType] = useState("restorants")
+ const [type, setType] = useState("Attractions")
 
     const navigation = useNavigation();
     const[isLoading,setIsLoading]=useState(false)
@@ -20,6 +23,7 @@ const Discover = () => {
     const [bl_lng, setBl_lng] = useState(null);
     const [tr_lat, setTr_lat] = useState(null);
     const [tr_lng, setTr_lng] = useState(null);
+    const [searchType, setSearchType] = useState('activities');
   
   
 
@@ -28,11 +32,18 @@ const Discover = () => {
         headerShown:false,
       })
     },[])
-    useEffect(()=>{setIsLoading(true);
+    useEffect(()=>{
+        setIsLoading(true);
+        // const bl_lat = 41.325708;
+        // const bl_lng = -5.559212;
+        // const tr_lat = 51.124199;
+        // const tr_lng = 9.662499;
         getPlacesData(bl_lat, bl_lng, tr_lat, tr_lng, type).then( data=>{
          setMainData(data);
+         setIsLoading(false);
          setInterval(()=>{setIsLoading(false)},4000)
         })
+
        },[bl_lat, bl_lng, tr_lat, tr_lng, type])
  
 
@@ -49,6 +60,23 @@ const Discover = () => {
                         France today
                     </Text>
                 </View>
+                <TouchableOpacity onPress ={() => navigation.navigate("WishListScreen")} className="w-16 h-16 rounded-md item-center justify-center shadow-lg">
+      {/* <Image source={WishList} className="w-full h-full rounded-md object-cover"/> */}
+      
+
+      <Animatable.View 
+        animation={"pulse"}
+        easing={'ease-in-out'}
+        iterationCount={"infinite"}
+        className = "w-20 h-20 items-center justify-center rounded-full ">
+            <AntDesign name="heart" size={40} color="red" />
+          {/* <Text className = "text-gray-50 text-[36px] font-semibold">
+            Go
+          </Text> */}
+        </Animatable.View>
+        
+
+      </TouchableOpacity>
 
                 <View className = "w-12 h-12 bg-red-400 rounded-md items-center justify-center shadow-lg">
                     <Image source={Avatar} className = " w-full h-full rounded-md object-cover"/>
@@ -68,12 +96,24 @@ const Discover = () => {
                     setTr_lat(details?.geometry?.viewport?.northeast?.lat);
                     setTr_lng(details?.geometry?.viewport?.northeast?.lng);
                 }}
+                
                 query={{
                     key: 'AIzaSyAWXM0FKIPjd8X5C3UozYRWtzIoB7iwVlA',
                     language: 'en',
-                }}
+                    types: searchType === 'places' ? ['establishment'] : ['point_of_interest'],
+                    components: 'country:fr', // Restrict search to France
+                  }}
                 />
+
             </View>
+            <View className="flex-row justify-center mt-4 p-2 rounded-2xl  w-full items-center">
+                                <TouchableOpacity onPress={() => setSearchType('places')} className={`px-4 py-2 rounded-xl ${searchType === 'places' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}>
+                                <Text className={searchType === 'places' ? 'font-bold' : ''}>Places</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => setSearchType('activities')} className={`px-4 py-2 rounded-xl ${searchType === 'activities' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}>
+                                <Text className={searchType === 'activities' ? 'font-bold' : ''}>Activities</Text>
+                                </TouchableOpacity>
+                        </View>
                 {/* Menu Container */}
                 {isLoading ? <View className = "flex-1 items-center justify-center">
                     <ActivityIndicator size={'large'} color={"#00ff00"}  />
@@ -147,6 +187,14 @@ const Discover = () => {
                                 />
 
                             ))}
+                             {/* <View className="flex-row justify-center mt-4">
+                                <TouchableOpacity onPress={() => setSearchType('places')} className={`px-4 py-2 rounded ${searchType === 'places' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}>
+                                <Text className={searchType === 'places' ? 'font-bold' : ''}>Places</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => setSearchType('activities')} className={`px-4 py-2 rounded ${searchType === 'activities' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}>
+                                <Text className={searchType === 'activities' ? 'font-bold' : ''}>Activities</Text>
+                                </TouchableOpacity>
+                            </View> */}
 
 
                             </> :<>
