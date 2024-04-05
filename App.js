@@ -10,6 +10,9 @@ import ItemScreen from './screens/ItemScreen';
 import Explore from './screens/Explore';
 import WishListScreen from './screens/WishListScreen';
 import EnglishToFrench from './screens/EnglishToFrench';
+import ScavengerHunt from './screens/ScavengerHunt';
+import MapScreen from './screens/MapScreen';
+import Cards from './screens/Cards';
 
 
  const Stack = createNativeStackNavigator();
@@ -24,6 +27,9 @@ export default function App() {
       <Stack.Screen name = "Explore" component={ Explore}/>
       <Stack.Screen name = "WishListScreen" component={WishListScreen}/>
       <Stack.Screen name = "EnglishToFrench" component={EnglishToFrench}/>
+      <Stack.Screen name = "ScavengerHunt" component={ ScavengerHunt}/>
+      <Stack.Screen name = "MapScreen" component={ MapScreen}/>
+      <Stack.Screen name = "Cards" component={ Cards}/>
     </Stack.Navigator>
   </NavigationContainer>
   );

@@ -12,7 +12,8 @@ app.use(cors());
 // ... (rest of your code)
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/FranceTourism', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://rohansethi1999430:xuzbR8CV1xCaCLWa@cluster0.6nmf0ry.mongodb.net/FranceTourism', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/FranceTourism', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Set up a basic schema for your data
 const dataSchema = new mongoose.Schema({

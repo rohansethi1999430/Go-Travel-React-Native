@@ -3,6 +3,7 @@ import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
  import  {HeroImage}  from '../assets/index';
  import * as Animatable from 'react-native-animatable';
+ import { FontAwesome5 } from '@expo/vector-icons';
 
 
 const HomeScreen = () => {
@@ -30,6 +31,9 @@ useLayoutEffect(() =>{
           <Text className = "text-[#2A2B4B] text-3xl font-semibold">
             Travel
           </Text>
+          <Text className = "text-[#2A2B4B] text-3xl font-semibold">
+            France
+          </Text>
         </View>
 
       <View className = "mt-8 space-y-1 px-6">
@@ -46,9 +50,27 @@ useLayoutEffect(() =>{
         </Text>
       </View>
 {/* Circle Section */}
-      <View className = "w-[400px] h-[400px] bg-[#00BCC9] rounded-full absolute bottom-36 -right-40"></View>
-      <View className = "w-[400px] h-[400px] bg-[#E99265] rounded-full absolute -bottom-36 -left-36"></View>
+      {/* <View className = "w-[400px] h-[400px] bg-[#00BCC9] rounded-full absolute bottom-36 -right-40"></View>
+      <View className = "w-[400px] h-[400px] bg-[#E99265] rounded-full absolute -bottom-36 -left-36"></View> */}
+      <View>
 
+        <TouchableOpacity className = " items-center" 
+        onPress={()=>navigation.navigate("ScavengerHunt")}
+        >
+        <Animatable.View 
+        animation={"pulse"}
+        easing={'ease-in-out'}
+        iterationCount={"infinite"}
+        className = "w-80 h-20 items-center justify-center rounded-full bg-[#00BCC9] m-2">
+          <Text className = "text-gray-50 text-[24px] font-semibold">
+            Play Scavenger Hunt
+          </Text>
+          <FontAwesome5 name="gamepad" size={40} color="black" />
+
+        </Animatable.View>
+        </TouchableOpacity>
+        
+      </View>
       <View className = "flex-1 relative items-center justify-center">
 
         <Animatable.Image

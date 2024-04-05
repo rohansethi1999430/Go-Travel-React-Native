@@ -43,7 +43,7 @@ useLayoutEffect(() =>{
             <LottieView
                 source={require('../assets/Animation - 1711471601825.json')}
                 autoPlay
-                loop
+                loop = {false}
                 className = "w-full h-[100%]"
               />
             </View>

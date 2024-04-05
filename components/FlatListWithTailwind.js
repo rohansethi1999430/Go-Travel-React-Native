@@ -5,9 +5,9 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 // Dummy data for the FlatList
 const DATA = [
   { id: 'EnglishToFrench', title: 'Français Facile', translate: "Easy French" },
-  { id: 'Learn', title: 'Apprends le français', translate: "Learn French" },
-  { id: 'FrenchCuisine', title: 'Découvrez la cuisine française', translate: "Discover the French cuisine" },
-  { id: 'History', title: 'Histoire de France', translate: "History of France" }
+  { id: 'Cards', title: 'Faits amusants sur la France', translate: "Fun Facts about France" },
+  { id: 'ScavengerHunt', title: 'je veux jouer à la chasse au trésor', translate: "Want to play scavenger hunt??" },
+  // { id: 'History', title: 'Histoire de France', translate: "History of France" }
 ];
 
 const FlatListWithTailwind = () => {
@@ -28,8 +28,11 @@ const FlatListWithTailwind = () => {
       case 'EnglishToFrench':
         navigation.navigate("EnglishToFrench");
         break;
-      case 'Learn':
-        navigation.navigate("Learn");
+      case 'Cards':
+        navigation.navigate("Cards");
+        break;
+      case 'ScavengerHunt':
+        navigation.navigate("ScavengerHunt");
         break;
       // Add cases for other IDs as needed
       default:
