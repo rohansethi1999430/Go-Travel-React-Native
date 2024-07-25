@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
- import { SafeAreaView, Text, View } from 'react-native';
+//  import { SafeAreaView, Text, View } from 'react-native';
  import HomeScreen from './screens/HomeScreen'
 import Discover from './screens/Discover';
 import ItemScreen from './screens/ItemScreen';

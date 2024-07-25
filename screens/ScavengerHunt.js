@@ -8,6 +8,8 @@ import axios from 'axios';
 import { Avatar } from '../assets';
 import LottieView from 'lottie-react-native';
 import { Entypo } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { FontAwesome6 } from '@expo/vector-icons';
  
 const ScavengerHunt = () => {
   const navigation = useNavigation();
@@ -33,7 +35,7 @@ const ScavengerHunt = () => {
     { id: 1, description: 'Find the Eiffel Tower.', found: false, imageUri: null },
     { id: 2, description: 'Look for the red mailbox near the cafe.', found: false, imageUri: null },
     { id: 3, description: 'Search for the laptop.', found: false, imageUri: null },
-    { id: 4, description: 'Check for human near by', found: false, imageUri: null },
+    //  { id: 4, description: 'Check for human near by', found: false, imageUri: null },
   ];
   const [clues, setClues] = useState(initialClues);
  
@@ -50,7 +52,7 @@ const ScavengerHunt = () => {
   useEffect(() => {
     const fetchGameData = async () => {
       try {
-        const response = await axios.get('http://192.168.2.35:2000/getGameData/user1');   
+        const response = await axios.get('https://francetourismbacken.netlify.app/.netlify/functions/scavengerHuntBackend/getGameData/user1');   
         if (response.data && response.data.updatedClues && response.data.updatedClues.length > 0) {
           setClues(response.data.updatedClues);
         } else {
@@ -122,7 +124,7 @@ const ScavengerHunt = () => {
             setCompliment(compliments[Math.floor(Math.random() * compliments.length)]);
             console.log(updatedClues)
             const jsonData = {updatedClues,"user":1}
-            axios.post('http://192.168.2.35:2000/saveDataImage', jsonData)
+            axios.post('https://francetourismbacken.netlify.app/.netlify/functions/scavengerHuntBackend/saveDataImage', jsonData)
               .then((response) => console.log(response.data))
               .catch((error) => console.error("Error saving data:", error));
             
@@ -176,7 +178,8 @@ const ScavengerHunt = () => {
 {/* style={styles.mapButton} */}
 <TouchableOpacity className = " bg-green-500 p-2 rounded-xl ml-2 flex-row" onPress={handleViewMap}>
           <Text style={styles.mapButtonText}>View Map</Text>
-          <Entypo name="location-pin" size={24} color="white" />
+          {/* <Entypo name="location-pin" size={24} color="white" /> */}
+          <FontAwesome6 name="location-dot" size={24} color="white" />
         </TouchableOpacity>
 <View className = "  bg-blue-400 w-20 rounded-xl p-2 mr-3 ">
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const dataForLikes = async () => {
   try {
-    const data= await axios.get('http://192.168.2.35:3000/getData');
+    const data= await axios.get('https://francetourismbacken.netlify.app/.netlify/functions/exposedApis/getData');
     return data;
   } catch (error) {
     console.error(error);
@@ -14,7 +14,7 @@ export const dataForLikes = async () => {
 
 export const savingLikedData = function saveDataToMongoDB(data) {
   console.log(data)
-  fetch('http://192.168.2.35:3000/saveData', {
+  fetch('https://francetourismbacken.netlify.app/.netlify/functions/exposedApis/saveData', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
