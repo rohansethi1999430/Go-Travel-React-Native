@@ -13,7 +13,7 @@ Welcome to GoTravel France, the ultimate travel companion app designed to enhanc
 ## Technologies
 
 - **Frontend**: React Native for a seamless user experience across different devices.
-- **Backend**: Node.js and Express for robust server-side logic.
+- **Backend**: Node.js, Express and Java for robust server-side logic.
 - **Database**: MongoDB for efficient data storage and retrieval.
 - **Deployment**: Deployed on the Expo app store, ensuring easy installation and updates.
 
